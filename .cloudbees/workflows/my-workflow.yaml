@@ -22,5 +22,5 @@ jobs:
         with: 
           file-path: /cloudbees/workspace/target/dependency/webapp-runner.jar
           debug: "true"
-          file-name: "TrainBook.jar"
+          file-name: "webapp-runner.jar"
           file-type: "BINARY_JAR"
