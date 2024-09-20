@@ -1,12 +1,11 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
 name: My workflow
-
 on:
   push:
     branches:
-      - '**'
-
+      - "**"
+  workflow_dispatch:
 jobs:
   build:
     steps:
@@ -18,9 +17,9 @@ jobs:
           mvn clean package
       - id: upload-binary
         name: Upload binary using action
-        uses: calculi-corp/assets-plugin-chain-utils/upload-binary@v1     
-        with: 
+        uses: calculi-corp/assets-plugin-chain-utils/upload-binary@v1
+        with:
           file-path: /cloudbees/workspace/target/dependency/webapp-runner.jar
           debug: "true"
-          file-name: "webapp-runner.jar"
-          file-type: "BINARY_JAR"
+          file-name: webapp-runner.jar
+          file-type: BINARY_JAR
