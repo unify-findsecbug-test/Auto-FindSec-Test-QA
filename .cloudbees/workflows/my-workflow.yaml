@@ -17,7 +17,7 @@ jobs:
           mvn clean package
       - id: upload-binary
         name: Upload binary using action
-        uses: calculi-corp/assets-plugin-chain-utils/upload-binary@v1
+        uses: cloudbees-io/asset-chain-utils/upload-binary@v1
         with:
           file-path: /cloudbees/workspace/target/dependency/webapp-runner.jar
           debug: "true"
