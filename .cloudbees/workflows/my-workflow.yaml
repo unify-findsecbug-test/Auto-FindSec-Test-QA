@@ -1,25 +1,21 @@
-apiVersion: automation.cloudbees.io/v1alpha1
+name: findsecbugs-hybrid-plugin
 kind: workflow
-name: My workflow
+apiVersion: automation.cloudbees.io/v1alpha1
 on:
   push:
     branches:
-      - "**"
+      - master
   workflow_dispatch:
+permissions:
+  scm-token-own: read
+  scm-token-org: read
+  id-token: write
 jobs:
-  build:
+  findsecbugs-hybrid-scan:
     steps:
-      - name: Get source code
+      - name: checkout Source Code
         uses: cloudbees-io/checkout@v1
-      - name: Build Java App
-        uses: docker://maven:3.8.4-eclipse-temurin-17
-        run: |
-          mvn clean package
-      - id: upload-binary
-        name: Upload binary using action
-        uses: cloudbees-io/asset-chain-utils/upload-binary@v1
+      - name: findsec hybrid plugin scan
+        uses: cloudbees-io/findsecbugs-hybrid-plugin@main
         with:
-          file-path: /cloudbees/workspace/target/dependency/webapp-runner.jar
-          debug: "true"
-          file-name: webapp-runner.jar
-          file-type: BINARY_JAR
+          binary-tar-path: ./vulnado-0.0.1-SNAPSHOT.tar
